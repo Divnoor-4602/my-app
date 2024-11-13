@@ -14,3 +14,16 @@ export async function createUser(params: CreateUserParams) {
     throw error;
   }
 }
+
+export async function getUser(clerkId: string) {
+  try {
+    await databaseConnect();
+
+    const user = await User.findOne({ clerkId });
+
+    return user;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+}

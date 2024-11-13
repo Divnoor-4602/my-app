@@ -1,38 +1,33 @@
 import { databaseConnect } from "@/lib/mongoose";
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { createUploadthing } from "uploadthing/server";
-import User from "@/database/user.model";
+import {
+  createUploadthing,
+  FileRouter,
+  UploadThingError,
+} from "uploadthing/server";
 import File from "@/database/file.model";
 import { getFile } from "@/lib/actions/file.action";
+import { getUser } from "@/lib/actions/user.action";
 
 const f = createUploadthing();
 
-export const uploadRouter = {
-  withAwaitedServerData: f(
-    { image: { maxFileSize: "2MB", maxFileCount: 1, minFileCount: 1 } },
-    { awaitServerData: true }
-  )
-    .middleware(async ({ req }) => {
+export const ourFileRouter = {
+  // Define as many FileRoutes as you like, each with a unique routeSlug
+  imageUploader: f({ image: { maxFileSize: "4MB" } })
+    // Set permissions and file types for this FileRoute
+    .middleware(async () => {
       const user = await currentUser();
 
-      // database connection
-      await databaseConnect();
-
-      if (!user || !user.id) throw new Error("Unauthorised");
+      if (!user) throw new UploadThingError("Unauthorized");
 
       return { userId: user.id };
     })
     .onUploadComplete(async ({ metadata, file }) => {
-      // check if the file already exists or not
-      const existingFile = await getFile({
-        clerkId: metadata.userId,
-        key: file.key,
-      });
-
-      // create a new image file
-
-      // send this to ai and do some shit
-
-      return { foo: "bar" as const };
+      // This code RUNS ON YOUR SERVER after upload
+      console.log("Upload complete for userId:", metadata.userId);
+      console.log("file url", file.url);
+      // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
+      return { uploadedBy: metadata.userId };
     }),
-};12                
+} satisfies FileRouter;
+export type OurFileRouter = typeof ourFileRouter;
