@@ -9,7 +9,7 @@ const Page = () => {
         <main>
           <div className="flex-col-reverse sm:flex-row gap-6 flex justify-between items-center">
             <h1 className="text-5xl tracking-tighter font-open font-bold">
-              Your files
+              Your Posts
             </h1>
           </div>
           <div className="border-b border-secondary mt-4" />
