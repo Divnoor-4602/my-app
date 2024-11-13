@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { VideoComponent } from "@/components/VideoComponent";
 import { fetchUserPosts } from "@/lib/actions/post.action";
@@ -36,19 +35,8 @@ const Dashboard = ({
           {data?.map((post, index) => (
             <Card key={index} className="rounded-3xl">
               <CardContent className="flex flex-col gap-5 items-start space-x-4 pt-6">
-                <div className="flex items-center gap-4">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage
-                      src={post?.user?.picture}
-                      alt={`User ${post?.user?.name}`}
-                    />
-                    <AvatarFallback>{post?.user?.name}</AvatarFallback>
-                  </Avatar>
-                  <h3 className="text-base font-semibold">
-                    {post?.user?.email}
-                  </h3>
-                </div>
-                <div className="flex-1 w-[800px] h-[450px] self-center">
+                <div className="flex items-center gap-4"></div>
+                <div className="flex-1  h-[450px] self-center">
                   <div className="flex items-center text-sm text-muted-foreground">
                     <VideoComponent
                       videoUrl={post.key}

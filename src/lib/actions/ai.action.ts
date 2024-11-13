@@ -39,6 +39,10 @@ export const extractKeywordsFromPrompt = async (prompt: string) => {
 export const generateVideo = async (prompt: string, image: any) => {
   const client = new RunwayML();
 
+  if (prompt.length > 512) {
+    prompt = prompt.substring(0, 512);
+  }
+
   const imageToVideo = await client.imageToVideo.create({
     model: "gen3a_turbo",
     // Point this at your own image file
