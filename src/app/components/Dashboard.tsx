@@ -56,7 +56,7 @@ const Dashboard = ({
                     />
                   </div>
                   <p className="text-sm text-muted-foreground my-4">
-                    This is a brief preview of the cultural thought...
+                    {post.prompt}
                   </p>
                 </div>
               </CardContent>

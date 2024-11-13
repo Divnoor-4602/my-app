@@ -50,7 +50,7 @@ export const fetchUserPosts = async (params: FetchUserPostParams) => {
 
 export const createPost = async (params: CreatePostParams) => {
   try {
-    const { file, user, prompt, thumbnail, key, pathname } = params;
+    const { file, user, prompt, thumbnail, key, } = params;
 
     // Connect to the database
 
@@ -75,7 +75,7 @@ export const createPost = async (params: CreatePostParams) => {
       post: post._id,
     });
 
-    revalidatePath(pathname);
+    revalidatePath("/");
   } catch (error) {
     console.error(error);
     throw error;
