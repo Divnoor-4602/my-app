@@ -22,7 +22,7 @@ export const VideoComponent = ({
           <Play
             width={50}
             height={50}
-            className="p-3 absolute z-50 bg-white rounded-full"
+            className="p-3 absolute z-10 bg-white rounded-full"
             color="gray"
           />
         </div>

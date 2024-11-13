@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent } from "@/components/ui/card";
 import { VideoComponent } from "@/components/VideoComponent";
-import {  fetchUserPosts } from "@/lib/actions/post.action";
+import { fetchUserPosts } from "@/lib/actions/post.action";
 import { PostType } from "@/lib/actions/shared.types";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
@@ -56,7 +56,7 @@ const Dashboard = ({
                     />
                   </div>
                   <p className="text-sm text-muted-foreground my-4">
-                    This is a brief preview of the cultural thought...
+                    {post.prompt}
                   </p>
                 </div>
               </CardContent>
