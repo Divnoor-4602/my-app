@@ -22,7 +22,7 @@ export const fetchPosts = async () => {
       .populate("file")
       .populate("user"); // Populate the 'file' field with referenced data from 'File' schema and 'user' field with referenced data from 'User' schema
 
-    return posts as PostType[];
+    return JSON.stringify(posts as PostType[]);
   } catch (error) {
     console.error(error);
     throw error;
@@ -41,7 +41,7 @@ export const fetchUserPosts = async (params: FetchUserPostParams) => {
       throw new Error("User not found");
     }
 
-    return user;
+    return JSON.stringify(user.posts);
   } catch (error) {
     console.error(error);
     throw error;

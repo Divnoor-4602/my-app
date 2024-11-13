@@ -1,14 +1,17 @@
 import React from "react";
 import Dashboard from "../components/Dashboard";
 import MaxWidthWrapper from "../components/MaxWidthWrapper";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import UploadButton from "../components/UploadButton";
 import { fetchUserPosts } from "@/lib/actions/post.action";
+import { PostType } from "@/lib/actions/shared.types";
 
 const Page = async () => {
   const { userId } = await auth();
 
-  const userPosts = await fetchUserPosts({ clerkId: userId });
+  const userPosts: PostType[] = JSON.parse(
+    await fetchUserPosts({ clerkId: userId })!
+  );
 
   return (
     <>
@@ -22,7 +25,7 @@ const Page = async () => {
           </div>
           <div className="border-b border-secondary mt-4" />
         </main>
-        <Dashboard userPosts={userPosts} />
+        <Dashboard userPosts={userPosts} userId={userId!} />
       </MaxWidthWrapper>
     </>
   );
