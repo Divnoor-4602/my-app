@@ -21,6 +21,6 @@ const fileSchema = new Schema(
   { timestamps: true }
 );
 
-const File = models.File || model<IFile>("File", fileSchema);
+const File = models?.File || model<IFile>("File", fileSchema);
 
 export default File;

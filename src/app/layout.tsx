@@ -4,6 +4,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./components/Navbar";
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/providers/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,17 +20,19 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en">
-        <body
-          className={cn(
-            "min-h-screen font-sans antialiased grainy",
-            inter.className
-          )}
-        >
-          <Navbar />
-          {children}
-        </body>
-      </html>
+      <QueryProvider>
+        <html lang="en">
+          <body
+            className={cn(
+              "min-h-screen font-sans antialiased grainy",
+              inter.className
+            )}
+          >
+            {/* <Navbar /> */}
+            {children}
+          </body>
+        </html>
+      </QueryProvider>
     </ClerkProvider>
   );
 }
