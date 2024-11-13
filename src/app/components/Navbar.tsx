@@ -60,12 +60,7 @@ const Navbar = () => {
                     Dashboard
                   </Button>
                 </Link>
-                {/* by nippun */}
-                <Link href="/landingPage">
-                  <Button variant={"ghost"} size={"sm"}>
-                    Landing
-                  </Button>
-                </Link>
+
                 <UserButton />
               </SignedIn>
             </div>

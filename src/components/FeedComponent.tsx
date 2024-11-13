@@ -12,9 +12,6 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "@/lib/actions/post.action";
 import { VideoComponent } from "./VideoComponent";
 
-
-
-
 const FeedComponent = ({ posts }: { posts: PostType[] }) => {
   const [search, setSearch] = useState("");
   const [filteredPosts, setFilteredPosts] = useState(posts);
@@ -69,7 +66,7 @@ const FeedComponent = ({ posts }: { posts: PostType[] }) => {
                 </CardHeader>
                 <CardContent className="flex flex-col gap-4">
                   <div className="text-2xl font-bold">Coming Soon</div>
-                  <p className="text-xs text-muted-foreground">
+                  <p className="text-xs text-muted-foreground truncate">
                     Learn about diverse cultural perspectives
                   </p>
                   <Button variant="ghost" className="w-full ">
