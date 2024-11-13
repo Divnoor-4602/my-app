@@ -19,6 +19,6 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-const Post = models.Post || model<IPost>("Post", postSchema);
+const Post = models?.Post || model<IPost>("Post", postSchema);
 
 export default Post;

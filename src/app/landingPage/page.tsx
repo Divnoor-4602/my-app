@@ -5,8 +5,8 @@ export default function landingPage() {
   return (
     <div className="bg-[#F3F9FB]">
       <div className="w-2/3 m-auto">
-        <section className="hero text-center py-20 flex flex-row content-center">
-          <div className="w-1/2 self-center">
+        <section className="hero text-center py-28 flex flex-row content-center">
+          <div className="w-1/2 self-center justify-center">
             <h1 className="font-extrabold text-[#113F67] text-5xl mb-5">
               Lorem ipsum dolor sit amet, consectetur.
             </h1>
@@ -14,9 +14,9 @@ export default function landingPage() {
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
               libero esse aliquam sed quos explicabo hic fugit
             </p>
-            <button className="p-2 px-8 bg-[#226597] text-white font-bold border rounded-md">
+            <button className=" mx-auto p-2 px-8 pr-6 bg-[#226597] text-white font-bold border rounded-md flex gap-2 align-center hover:bg-opacity-90">
               Explore
-              <MoveRight />
+              <MoveRight size="25" strokeWidth="3" className="pt-[3px]" />
             </button>
           </div>
           <div className="w-1/2 pl-14">

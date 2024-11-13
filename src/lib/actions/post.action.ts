@@ -10,7 +10,8 @@ export const fetchPosts = async () => {
 
     const posts = await Post.find()
       .sort({ timestamp: -1 }) // Sort by 'timestamp' in descending order
-      .populate("file"); // Populate the 'file' field with referenced data from 'File' schema
+      .populate("file")
+      .populate("user"); // Populate the 'file' field with referenced data from 'File' schema and 'user' field with referenced data from 'User' schema
 
     return posts as PostType[];
   } catch (error) {
