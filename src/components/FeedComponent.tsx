@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import MaxWidthWrapper from "@/app/components/MaxWidthWrapper";
-import { Search, BookOpen, Video } from "lucide-react";
+import { Search, BookOpen } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,16 +10,21 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { PostType } from "@/lib/actions/shared.types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPosts } from "@/lib/actions/post.action";
+import { VideoComponent } from "./VideoComponent";
+
+
+
 
 const FeedComponent = ({ posts }: { posts: PostType[] }) => {
   const [search, setSearch] = useState("");
   const [filteredPosts, setFilteredPosts] = useState(posts);
   const { data, error } = useQuery({
     queryKey: ["all-posts"],
-    queryFn: async () => await fetchPosts(),
+    queryFn: async () => JSON.parse(await fetchPosts()!) as PostType[],
     initialData: posts,
     staleTime: 0,
   });
+  console.log(data);
 
   useEffect(() => {
     if (search.length > 0) {
@@ -58,16 +63,16 @@ const FeedComponent = ({ posts }: { posts: PostType[] }) => {
               <Card key={course} className="w-[250px] flex-shrink-0">
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium">
-                    Cultural Course {course}
+                    Cultural Course
                   </CardTitle>
                   <BookOpen className="h-4 w-4 text-muted-foreground" />
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">Chapter {course}</div>
+                <CardContent className="flex flex-col gap-4">
+                  <div className="text-2xl font-bold">Coming Soon</div>
                   <p className="text-xs text-muted-foreground">
                     Learn about diverse cultural perspectives
                   </p>
-                  <Button variant="ghost" className="w-full mt-4">
+                  <Button variant="ghost" className="w-full ">
                     Start Learning
                   </Button>
                 </CardContent>
@@ -81,32 +86,35 @@ const FeedComponent = ({ posts }: { posts: PostType[] }) => {
       {/* Latest Posts Section */}
       <section>
         <h2 className="text-2xl font-bold mb-4">Latest Posts</h2>
-        {data?.length === 0 ? (
+        {filteredPosts?.length === 0 ? (
           <div className="w-full flex justify-center items-center h-[200px] text-stone-500">
             No Content Yet
           </div>
         ) : (
           <div className="space-y-6">
             {filteredPosts?.map((post, index) => (
-              <Card key={index}>
-                <CardContent className="flex items-start space-x-4 pt-6">
-                  <Avatar className="w-8 h-8">
-                    <AvatarImage
-                      src={post?.user?.picture}
-                      alt={`User ${post?.user?.name}`}
-                    />
-                    <AvatarFallback>{post?.user?.name}</AvatarFallback>
-                  </Avatar>
-                  <div className="flex-1">
+              <Card key={index} className="rounded-3xl">
+                <CardContent className="flex flex-col gap-5 items-start space-x-4 pt-6">
+                  <div className="flex items-center gap-4">
+                    <Avatar className="w-8 h-8">
+                      <AvatarImage
+                        src={post?.user?.picture}
+                        alt={`User ${post?.user?.name}`}
+                      />
+                      <AvatarFallback>{post?.user?.name}</AvatarFallback>
+                    </Avatar>
                     <h3 className="text-base font-semibold">
-                      {post?.user?.name}
+                      {post?.user?.email}
                     </h3>
+                  </div>
+                  <div className="flex-1 w-[800px] h-[450px] self-center">
                     <div className="flex items-center text-sm text-muted-foreground">
-                      {/* Got to recheck video styling */}
-                      <Video className="h-4 w-4 mr-1" />
-                      <span>AI Video Generated</span>
+                      <VideoComponent
+                        videoUrl={post.key}
+                        thumbnailUrl={post.thumbnail}
+                      />
                     </div>
-                    <p className="text-sm text-muted-foreground mb-2">
+                    <p className="text-sm text-muted-foreground my-4">
                       This is a brief preview of the cultural thought...
                     </p>
                   </div>
