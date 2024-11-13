@@ -104,7 +104,7 @@ const FeedComponent = ({ posts }: { posts: PostType[] }) => {
                       {post?.user?.email}
                     </h3>
                   </div>
-                  <div className="flex-1 w-[800px] h-[450px] self-center">
+                  <div className="flex-1  h-[450px] self-center">
                     <div className="flex items-center text-sm text-muted-foreground">
                       <VideoComponent
                         videoUrl={post.key}
@@ -112,7 +112,7 @@ const FeedComponent = ({ posts }: { posts: PostType[] }) => {
                       />
                     </div>
                     <p className="text-sm text-muted-foreground my-4">
-                        {post.prompt}
+                      {post.prompt}
                     </p>
                   </div>
                 </CardContent>
