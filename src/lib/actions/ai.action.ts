@@ -35,6 +35,7 @@ export const extractKeywordsFromPrompt = async (prompt: string) => {
   return text;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const generateVideo = async (prompt: string, image: any) => {
   const client = new RunwayML();
 

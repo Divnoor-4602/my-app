@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable */
 
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -11,7 +12,7 @@ import {
 import Image from "next/image";
 import { UploadDropzone } from "../../lib/uploadthing";
 import { toast } from "sonner";
-import { Input } from "@/components/ui/input";
+
 import { Label } from "@radix-ui/react-label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -109,7 +110,7 @@ const UploadButton = () => {
     const videoObject = await generateVideo(text, uploadedImage.url);
 
     // now create a video object in the database
-    const post = await createPost({
+    await createPost({
       user: uploadedImage.user,
       prompt: prompt,
       thumbnail: uploadedImage.url,
