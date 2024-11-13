@@ -1,12 +1,16 @@
 import { databaseConnect } from "../mongoose";
 import User from "@/database/user.model";
+import { CreateUserParams } from "./shared.types";
 
-export const createUser = async (user: InstanceType<typeof User>) => {
+export async function createUser(params: CreateUserParams) {
   try {
     await databaseConnect();
-    const newUser = await User.create(user);
-    return newUser;
+
+    const user = await User.create(params);
+
+    return user;
   } catch (error) {
     console.log(error);
+    throw error;
   }
-};
+}
