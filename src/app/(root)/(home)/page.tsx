@@ -8,14 +8,14 @@ import { BackgroundLines } from "@/components/ui/background-lines";
 const Page = () => {
   return (
     <>
-      <MaxWidthWrapper>
-        <BackgroundLines className="mb-12  flex flex-col justify-center items-center text-center">
+      <BackgroundLines className="">
+        <MaxWidthWrapper className="md:mb-12 flex flex-col justify-center items-center text-center mt-52">
           <div className="bg-white rounded-full overflow-hidden mx-auto mb-4 items-center justify-center transition border border-gray-200 px-7 py-2 shadow-md hover:bg-white/50 hover:border-gray-300 backdrop-blur">
-            <p className="text-sm font-semibold text-gray-700 pointer-events-none">
+            <p className="text-xs sm:text-sm font-semibold text-gray-700 pointer-events-none">
               culturehub under development!
             </p>
           </div>
-          <h1 className="max-w-6xl text-5xl md:text-6xl lg:text-7xl font-bold">
+          <h1 className="max-w-6xl text-3xl md:text-6xl lg:text-7xl font-bold">
             Transform{" "}
             <span className="bg-gradient-to-r from-blue-700 to-blue-500 text-transparent bg-clip-text">
               Moments
@@ -40,8 +40,8 @@ const Page = () => {
             Get Started
             <ArrowRight className="ml-2 size-5" />
           </Link>
-        </BackgroundLines>
-      </MaxWidthWrapper>
+        </MaxWidthWrapper>
+      </BackgroundLines>
     </>
   );
 };
