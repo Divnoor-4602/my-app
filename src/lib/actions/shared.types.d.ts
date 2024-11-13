@@ -6,7 +6,13 @@ export interface CreateUserParams {
 }
 
 export type PostType = {
-  user: Schema.Types.ObjectId;
+  user: {
+    clerkId: string;
+    email: string;
+    picture: string;
+    name: string;
+    username: string;
+  };
   prompt: string;
   thumbnail: string;
   key: string;

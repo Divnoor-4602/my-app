@@ -5,6 +5,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "./components/Navbar";
 import { Toaster } from "sonner";
 import { cn } from "@/lib/utils";
+import QueryProvider from "@/providers/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,19 +20,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={cn(
-            "min-h-screen font-sans antialiased grainy",
-            inter.className
-          )}
-        >
-          <Navbar />
-          {children}
-          <Toaster richColors />
-        </body>
-      </html>
-    </ClerkProvider>
+    <QueryProvider>
+      <ClerkProvider>
+        <html lang="en">
+          <body
+            className={cn(
+              "min-h-screen font-sans antialiased grainy",
+              inter.className
+            )}
+          >
+            <Navbar />
+            {children}
+            <Toaster richColors />
+          </body>
+        </html>
+      </ClerkProvider>
+    </QueryProvider>
   );
 }
