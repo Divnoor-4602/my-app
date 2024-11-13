@@ -9,6 +9,7 @@ const Page = async () => {
   const { userId } = await auth();
 
   const userPosts = await fetchUserPosts({ clerkId: userId });
+
   return (
     <>
       <MaxWidthWrapper>
