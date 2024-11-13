@@ -1,10 +1,14 @@
 import React from "react";
 import Dashboard from "../components/Dashboard";
 import MaxWidthWrapper from "../components/MaxWidthWrapper";
-import { Button } from "@/components/ui/button";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import UploadButton from "../components/UploadButton";
+import { fetchUserPosts } from "@/lib/actions/post.action";
 
-const Page = () => {
+const Page = async () => {
+  const { userId } = await auth();
+
+  const userPosts = await fetchUserPosts({ clerkId: userId });
   return (
     <>
       <MaxWidthWrapper>
@@ -17,7 +21,7 @@ const Page = () => {
           </div>
           <div className="border-b border-secondary mt-4" />
         </main>
-        <Dashboard />
+        <Dashboard userPosts={userPosts} />
       </MaxWidthWrapper>
     </>
   );

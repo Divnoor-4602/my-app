@@ -38,3 +38,16 @@ export interface CreateFileParams {
   url: string;
   uploadStatus: string;
 }
+
+export interface FetchUserPostParams {
+  clerkId: string | null;
+}
+
+export interface CreatePostParams {
+  file: Schema.Types.ObjectId;
+  user: Schema.Types.ObjectId;
+  prompt: string;
+  thumbnail: string;
+  key: string;
+  pathname: string;
+}

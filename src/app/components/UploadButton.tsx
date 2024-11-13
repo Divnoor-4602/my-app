@@ -18,6 +18,8 @@ import {
   extractKeywordsFromPrompt,
   generateVideo,
 } from "@/lib/actions/ai.action";
+import { createPost } from "@/lib/actions/post.action";
+import { usePathname } from "next/navigation";
 
 const UploadingDropzone = ({
   onUploadedImage,
@@ -85,6 +87,8 @@ const UploadButton = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [uploadedImage, setUploadedImage] = useState<any>(null);
   const [prompt, setPrompt] = useState<string>("");
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const pathname = usePathname();
 
   const handleSubmit = async () => {
     console.log(prompt, uploadedImage);
@@ -93,6 +97,8 @@ const UploadButton = () => {
       toast.error("Please upload an image and enter a prompt!");
       return;
     }
+
+    setSubmitting(true);
 
     const text = await extractKeywordsFromPrompt(prompt);
 
@@ -103,6 +109,15 @@ const UploadButton = () => {
     const videoObject = await generateVideo(text, uploadedImage.url);
 
     // now create a video object in the database
+    const post = await createPost({
+      user: uploadedImage.user,
+      prompt: prompt,
+      thumbnail: uploadedImage.url,
+      key: videoObject.output ? videoObject.output[0] : "",
+      file: uploadedImage._id,
+      pathname,
+    });
+    setSubmitting(false);
 
     setPrompt("");
     setUploadedImage(null);
@@ -138,7 +153,7 @@ const UploadButton = () => {
             className=" bg-blue-600 hover:bg-blue-500 transition-colors w-full"
             onClick={handleSubmit}
           >
-            Create
+            {submitting ? "Creating" : "Create"}
           </Button>
         </DialogContent>
       </Dialog>
