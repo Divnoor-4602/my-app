@@ -5,6 +5,7 @@ export interface IPost extends Document {
   user: Schema.Types.ObjectId;
   prompt: string;
   thumbnail: string;
+  key: string;
 }
 
 const postSchema = new Schema(
@@ -13,6 +14,7 @@ const postSchema = new Schema(
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
     prompt: { type: String, required: true },
     thumbnail: { type: String, required: false },
+    key: { type: String, required: true },
   },
   { timestamps: true }
 );
