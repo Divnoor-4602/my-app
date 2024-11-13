@@ -1,3 +1,5 @@
+"use server";
+
 import { databaseConnect } from "../mongoose";
 import Post from "@/database/post.model";
 import { PostType } from "./shared.types";

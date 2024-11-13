@@ -30,3 +30,11 @@ export interface GetFileProps {
   clerkId: string;
   key: string;
 }
+
+export interface CreateFileParams {
+  clerkId: string;
+  key: string;
+  name: string;
+  url: string;
+  uploadStatus: string;
+}
